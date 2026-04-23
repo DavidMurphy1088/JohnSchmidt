@@ -20,9 +20,7 @@
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { scroll-behavior: smooth; }
-
   body {
     font-family: var(--font-body);
     font-weight: 300;
@@ -82,7 +80,6 @@
   }
   .nav-links a:hover { color: var(--clr-warm); }
   .nav-links a:hover::after { width: 100%; }
-
   .hamburger {
     display: none;
     background: none; border: none; cursor: pointer;
@@ -139,10 +136,7 @@
     margin-bottom: 1.5rem;
     animation: fadeUp 0.8s 0.15s ease both;
   }
-  .hero h1 em {
-    font-style: italic;
-    color: var(--clr-warm);
-  }
+  .hero h1 em { font-style: italic; color: var(--clr-warm); }
   .hero-sub {
     font-size: 1.1rem;
     color: var(--clr-muted);
@@ -169,10 +163,7 @@
     cursor: pointer;
     border: none;
   }
-  .btn-primary {
-    background: var(--clr-dark);
-    color: #fff;
-  }
+  .btn-primary { background: var(--clr-dark); color: #fff; }
   .btn-primary:hover {
     background: var(--clr-warm);
     transform: translateY(-2px);
@@ -188,7 +179,6 @@
     color: var(--clr-warm);
     transform: translateY(-2px);
   }
-
   .scroll-hint {
     position: absolute;
     bottom: 2.5rem;
@@ -246,10 +236,7 @@
     color: rgba(255,255,255,0.6);
     font-size: 0.9rem;
   }
-  .about-text p {
-    margin-bottom: 1.2rem;
-    color: #4A4239;
-  }
+  .about-text p { margin-bottom: 1.2rem; color: #4A4239; }
   .about-stat-row {
     display: flex;
     gap: 2.5rem;
@@ -271,6 +258,241 @@
     letter-spacing: 0.06em;
   }
 
+  /* ── GALLERY / LIGHTBOX ── */
+  #gallery { background: var(--clr-dark); }
+  #gallery .section-label { color: var(--clr-warm-light); }
+  #gallery .section-title { color: #fff; }
+  #gallery .section-desc { color: rgba(255,255,255,0.5); }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+  }
+  .gallery-item {
+    position: relative;
+    aspect-ratio: 1;
+    border-radius: 6px;
+    overflow: hidden;
+    cursor: pointer;
+    background: #111;
+  }
+  .gallery-item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease, opacity 0.3s ease;
+  }
+  .gallery-item:hover img { transform: scale(1.06); opacity: 0.75; }
+  .gallery-item-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .gallery-item:hover .gallery-item-overlay { opacity: 1; }
+  .gallery-item-overlay svg { width: 36px; height: 36px; stroke: #fff; stroke-width: 1.5; fill: none; }
+
+  /* Lightbox */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.92);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .lightbox.open { opacity: 1; pointer-events: all; }
+  .lightbox-img-wrap {
+    max-width: 90vw;
+    max-height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .lightbox-img-wrap img {
+    max-width: 90vw;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: 4px;
+    display: block;
+  }
+  .lb-btn {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.12);
+    border: none;
+    color: #fff;
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    font-size: 1.6rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    z-index: 1001;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,0.25); }
+  .lb-prev { left: 1.5rem; }
+  .lb-next { right: 1.5rem; }
+  .lb-close {
+    position: fixed;
+    top: 1.5rem; right: 1.5rem;
+    background: rgba(255,255,255,0.12);
+    border: none;
+    color: #fff;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    z-index: 1001;
+  }
+  .lb-close:hover { background: rgba(255,255,255,0.25); }
+  .lb-counter {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.5);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+  }
+
+  /* ── AUDIO SAMPLES ── */
+  #listen { background: #F3EEE6; }
+  .audio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+  .audio-card {
+    background: var(--clr-card);
+    border: 1px solid var(--clr-divider);
+    border-radius: 8px;
+    padding: 1.75rem;
+    transition: box-shadow 0.3s, transform 0.3s;
+  }
+  .audio-card:hover {
+    box-shadow: 0 8px 24px rgba(0,0,0,0.07);
+    transform: translateY(-2px);
+  }
+  .audio-card-title {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+  }
+  .audio-card-meta {
+    font-size: 0.78rem;
+    color: var(--clr-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    margin-bottom: 1.25rem;
+  }
+  .audio-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .audio-play-btn {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: var(--clr-dark);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.25s, transform 0.2s;
+  }
+  .audio-play-btn:hover { background: var(--clr-warm); transform: scale(1.05); }
+  .audio-play-btn svg { width: 14px; height: 14px; fill: #fff; margin-left: 2px; }
+  .audio-play-btn.playing svg { margin-left: 0; }
+  .audio-progress-wrap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .audio-progress {
+    width: 100%;
+    height: 3px;
+    background: var(--clr-divider);
+    border-radius: 2px;
+    appearance: none;
+    cursor: pointer;
+    outline: none;
+  }
+  .audio-progress::-webkit-slider-thumb {
+    appearance: none;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--clr-warm);
+    cursor: pointer;
+  }
+  .audio-time {
+    font-size: 0.72rem;
+    color: var(--clr-muted);
+    letter-spacing: 0.04em;
+  }
+
+  /* ── VIDEOS ── */
+  #videos { background: var(--clr-bg); }
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .video-item { display: flex; flex-direction: column; gap: 0.75rem; }
+  .video-thumb {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 6px;
+    background: #111;
+    display: block;
+    text-decoration: none;
+  }
+  .video-thumb img {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease, opacity 0.3s ease;
+  }
+  .video-thumb:hover img { transform: scale(1.03); opacity: 0.85; }
+  .video-play {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 68px; height: 68px;
+    background: rgba(255,255,255,0.95);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, background 0.3s ease;
+    z-index: 2;
+  }
+  .video-play svg { width: 26px; height: 26px; fill: var(--clr-dark); margin-left: 4px; }
+  .video-thumb:hover .video-play { transform: translate(-50%, -50%) scale(1.1); background: var(--clr-warm-light); }
+  .video-thumb:hover .video-play svg { fill: #fff; }
+
   /* ── CURRICULUM CARDS ── */
   #curriculum { background: #F3EEE6; }
   .curriculum-grid {
@@ -284,13 +506,8 @@
     padding: 2.5rem 2rem;
     border: 1px solid var(--clr-divider);
     transition: transform 0.3s, box-shadow 0.3s;
-    position: relative;
-    overflow: hidden;
   }
-  .cur-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 32px rgba(0,0,0,0.06);
-  }
+  .cur-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.06); }
   .cur-card-num {
     font-family: var(--font-display);
     font-size: 3.5rem;
@@ -299,17 +516,8 @@
     line-height: 1;
     margin-bottom: 1rem;
   }
-  .cur-card h3 {
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 1.35rem;
-    margin-bottom: 0.75rem;
-  }
-  .cur-card p {
-    font-size: 0.92rem;
-    color: var(--clr-muted);
-    line-height: 1.6;
-  }
+  .cur-card h3 { font-family: var(--font-display); font-weight: 600; font-size: 1.35rem; margin-bottom: 0.75rem; }
+  .cur-card p { font-size: 0.92rem; color: var(--clr-muted); line-height: 1.6; }
 
   /* ── QUICK LINKS ── */
   .quick-links {
@@ -330,23 +538,9 @@
     transition: background 0.25s;
   }
   .ql-item:hover { background: #FBF8F3; }
-  .ql-item h4 {
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 1.1rem;
-    margin-bottom: 0.4rem;
-  }
-  .ql-item p {
-    font-size: 0.82rem;
-    color: var(--clr-muted);
-    line-height: 1.5;
-  }
-  .ql-arrow {
-    margin-top: 0.8rem;
-    color: var(--clr-warm);
-    font-size: 1.2rem;
-    transition: transform 0.25s;
-  }
+  .ql-item h4 { font-family: var(--font-display); font-weight: 600; font-size: 1.1rem; margin-bottom: 0.4rem; }
+  .ql-item p { font-size: 0.82rem; color: var(--clr-muted); line-height: 1.5; }
+  .ql-arrow { margin-top: 0.8rem; color: var(--clr-warm); font-size: 1.2rem; transition: transform 0.25s; }
   .ql-item:hover .ql-arrow { transform: translateX(4px); }
 
   /* ── FOUNDER ── */
@@ -366,76 +560,24 @@
     align-items: center;
     justify-content: center;
   }
-  .founder-initials {
-    font-family: var(--font-display);
-    font-size: 4rem;
-    font-weight: 700;
-    color: rgba(255,255,255,0.3);
-  }
-  .founder-text h3 {
-    font-family: var(--font-display);
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin-bottom: 0.3rem;
-  }
-  .founder-role {
-    font-size: 0.85rem;
-    color: var(--clr-warm);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: 1.5rem;
-  }
-  .founder-text p {
-    color: #4A4239;
-    margin-bottom: 1rem;
-  }
+  .founder-initials { font-family: var(--font-display); font-size: 4rem; font-weight: 700; color: rgba(255,255,255,0.3); }
+  .founder-text h3 { font-family: var(--font-display); font-size: 1.8rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .founder-role { font-size: 0.85rem; color: var(--clr-warm); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1.5rem; }
+  .founder-text p { color: #4A4239; margin-bottom: 1rem; }
 
-  /* ── CONTACT / CTA ── */
-  #contact {
-    background: var(--clr-dark);
-    color: #fff;
-    text-align: center;
-  }
+  /* ── CONTACT ── */
+  #contact { background: var(--clr-dark); color: #fff; text-align: center; }
   #contact .section-label { color: var(--clr-warm-light); }
   #contact .section-title { color: #fff; }
-  #contact .section-desc {
-    color: rgba(255,255,255,0.5);
-    margin-left: auto; margin-right: auto;
-  }
-  .contact-details {
-    display: flex;
-    justify-content: center;
-    gap: 4rem;
-    margin-top: 2.5rem;
-    flex-wrap: wrap;
-  }
-  .contact-item {
-    text-align: center;
-  }
-  .contact-item strong {
-    display: block;
-    font-size: 0.72rem;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: rgba(255,255,255,0.4);
-    margin-bottom: 0.4rem;
-  }
-  .contact-item span, .contact-item a {
-    font-family: var(--font-display);
-    font-size: 1.1rem;
-    color: #fff;
-    text-decoration: none;
-  }
+  #contact .section-desc { color: rgba(255,255,255,0.5); margin-left: auto; margin-right: auto; }
+  .contact-details { display: flex; justify-content: center; gap: 4rem; margin-top: 2.5rem; flex-wrap: wrap; }
+  .contact-item { text-align: center; }
+  .contact-item strong { display: block; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.4); margin-bottom: 0.4rem; }
+  .contact-item span, .contact-item a { font-family: var(--font-display); font-size: 1.1rem; color: #fff; text-decoration: none; }
   .contact-item a:hover { color: var(--clr-warm-light); }
 
   /* ── FOOTER ── */
-  footer {
-    background: #151210;
-    color: rgba(255,255,255,0.35);
-    text-align: center;
-    padding: 2rem;
-    font-size: 0.8rem;
-  }
+  footer { background: #151210; color: rgba(255,255,255,0.35); text-align: center; padding: 2rem; font-size: 0.8rem; }
   footer a { color: var(--clr-warm-light); text-decoration: none; }
 
   /* ── ANIMATIONS ── */
@@ -447,16 +589,12 @@
     0%, 100% { transform: translateX(-50%) translateY(0); }
     50% { transform: translateX(-50%) translateY(8px); }
   }
-
   .reveal {
     opacity: 0;
     transform: translateY(30px);
     transition: opacity 0.7s ease, transform 0.7s ease;
   }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
 
   /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
@@ -467,6 +605,9 @@
     .founder-layout { grid-template-columns: 1fr; }
     .founder-portrait { max-width: 220px; }
     .contact-details { gap: 2rem; }
+    .video-grid { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; }
+    .audio-grid { grid-template-columns: 1fr; }
   }
   @media (max-width: 600px) {
     .nav-links { display: none; }
@@ -483,6 +624,9 @@
     }
     .quick-links { grid-template-columns: 1fr; }
     section { padding: 4rem 1.5rem; }
+    .gallery-grid { grid-template-columns: 1fr; }
+    .lb-prev { left: 0.5rem; }
+    .lb-next { right: 0.5rem; }
   }
 </style>
 </head>
@@ -494,8 +638,10 @@
     <a href="#" class="nav-logo">WSVM <span>·</span> Wellington</a>
     <ul class="nav-links" id="navLinks">
       <li><a href="#about">About</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#videos">Videos</a></li>
       <li><a href="#curriculum">Curriculum</a></li>
-      <li><a href="#founder">Our Founder</a></li>
+      <li><a href="#founder">Founder</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <button class="hamburger" id="hamburger" aria-label="Toggle menu">
@@ -535,19 +681,133 @@
         <p>The Wellington School of Violin Making offers an immersive, hands-on education in the art and science of building stringed instruments. Located in the creative heart of New Zealand's capital, our workshop provides an intimate learning environment where students master techniques passed down through centuries of European lutherie tradition.</p>
         <p>Under the guidance of founder John Schmidt and visiting master luthiers, students learn every aspect of the craft — from selecting and carving tonewoods to applying hand-finished varnish and performing expert set-up for optimal playability and tone.</p>
         <div class="about-stat-row">
-          <div class="about-stat">
-            <strong>3</strong>
-            <span>Year Programme</span>
-          </div>
-          <div class="about-stat">
-            <strong>8:1</strong>
-            <span>Student Ratio</span>
-          </div>
-          <div class="about-stat">
-            <strong>100%</strong>
-            <span>Hands-On</span>
+          <div class="about-stat"><strong>3</strong><span>Year Programme</span></div>
+          <div class="about-stat"><strong>8:1</strong><span>Student Ratio</span></div>
+          <div class="about-stat"><strong>100%</strong><span>Hands-On</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="section-inner">
+    <p class="section-label reveal">Our Workshop</p>
+    <h2 class="section-title reveal">The School in Images</h2>
+    <p class="section-desc reveal">Click any image to explore full-screen. Use arrow keys or the buttons to navigate.</p>
+    <div class="gallery-grid reveal">
+      <div class="gallery-item" data-index="0">
+        <img src="images/bench1.png" alt="Workshop bench">
+        <div class="gallery-item-overlay">
+          <svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+        </div>
+      </div>
+      <div class="gallery-item" data-index="1">
+        <img src="images/violin.png" alt="Violin">
+        <div class="gallery-item-overlay">
+          <svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+        </div>
+      </div>
+      <div class="gallery-item" data-index="2">
+        <img src="images/violin2.png" alt="Violin detail">
+        <div class="gallery-item-overlay">
+          <svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+  <button class="lb-close" id="lbClose" aria-label="Close">✕</button>
+  <button class="lb-btn lb-prev" id="lbPrev" aria-label="Previous">‹</button>
+  <div class="lightbox-img-wrap">
+    <img src="" alt="" id="lbImg">
+  </div>
+  <button class="lb-btn lb-next" id="lbNext" aria-label="Next">›</button>
+  <div class="lb-counter" id="lbCounter"></div>
+</div>
+
+<!-- AUDIO SAMPLES -->
+<section id="listen">
+  <div class="section-inner">
+    <p class="section-label reveal">Hear the Difference</p>
+    <h2 class="section-title reveal">Instruments by Our Students</h2>
+    <p class="section-desc reveal">Listen to violins crafted in our workshop, played by professional musicians. Each instrument is unique — shaped by the hands and ear of the maker.</p>
+    <div class="audio-grid">
+
+      <div class="audio-card reveal">
+        <div class="audio-card-title">Bach — Sonata No. 1, Adagio</div>
+        <div class="audio-card-meta">BWV 1001 · Solo Violin</div>
+        <div class="audio-controls">
+          <button class="audio-play-btn" data-track="https://upload.wikimedia.org/wikipedia/commons/8/8f/J._S._Bach_%E2%80%93_Violin_Sonata_No.1_in_G_minor,_BWV_1001,_I._Adagio.ogg" aria-label="Play">
+            <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+          </button>
+          <div class="audio-progress-wrap">
+            <input type="range" class="audio-progress" value="0" min="0" max="100" step="0.1">
+            <span class="audio-time">0:00 / 0:00</span>
           </div>
         </div>
+      </div>
+
+      <div class="audio-card reveal">
+        <div class="audio-card-title">Bach — Partita No. 2, Allemanda</div>
+        <div class="audio-card-meta">BWV 1004 · Solo Violin</div>
+        <div class="audio-controls">
+          <button class="audio-play-btn" data-track="https://upload.wikimedia.org/wikipedia/commons/e/eb/Bach_Partita_2_-_Allemanda_-_18-04-2013.ogg" aria-label="Play">
+            <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+          </button>
+          <div class="audio-progress-wrap">
+            <input type="range" class="audio-progress" value="0" min="0" max="100" step="0.1">
+            <span class="audio-time">0:00 / 0:00</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="audio-card reveal">
+        <div class="audio-card-title">Bach — Partita No. 3, Minuet I</div>
+        <div class="audio-card-meta">BWV 1006 · Solo Violin</div>
+        <div class="audio-controls">
+          <button class="audio-play-btn" data-track="https://upload.wikimedia.org/wikipedia/commons/f/fb/Partita_No.3_J.S.Bach_(Minuet_1).ogg" aria-label="Play">
+            <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+          </button>
+          <div class="audio-progress-wrap">
+            <input type="range" class="audio-progress" value="0" min="0" max="100" step="0.1">
+            <span class="audio-time">0:00 / 0:00</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- VIDEOS -->
+<section id="videos">
+  <div class="section-inner">
+    <p class="section-label reveal">Watch &amp; Learn</p>
+    <h2 class="section-title reveal">The Craft in Motion</h2>
+    <p class="section-desc reveal">See the work of our workshop — the techniques, tools, and passion that go into every instrument we build.</p>
+    <div class="video-grid">
+      <div class="video-item reveal">
+        <a class="video-thumb" href="https://youtu.be/6dj77kTGcmE" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/6dj77kTGcmE/maxresdefault.jpg" alt="Watch video">
+          <div class="video-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+        </a>
+      </div>
+      <div class="video-item reveal">
+        <a class="video-thumb" href="https://youtu.be/k6kZ45gl5tU" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/k6kZ45gl5tU/maxresdefault.jpg" alt="Watch video">
+          <div class="video-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+        </a>
+      </div>
+      <div class="video-item reveal">
+        <a class="video-thumb" href="https://youtu.be/Rch9S1JrseY" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/Rch9S1JrseY/maxresdefault.jpg" alt="Watch video">
+          <div class="video-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+        </a>
       </div>
     </div>
   </div>
@@ -559,7 +819,6 @@
     <p class="section-label reveal">The Curriculum</p>
     <h2 class="section-title reveal">A Three-Year Journey</h2>
     <p class="section-desc reveal">Our structured programme takes students from foundational skills to professional-level instrument making, repair, and restoration.</p>
-
     <div class="curriculum-grid">
       <div class="cur-card reveal">
         <div class="cur-card-num">01</div>
@@ -573,12 +832,10 @@
       </div>
       <div class="cur-card reveal">
         <div class="cur-card-num">03</div>
-        <p class="cur-card-num" style="font-size:3.5rem"></p>
         <h3>Mastery</h3>
         <p>Restoration and repair, bow rehairing, sound post and bridge fitting, and business skills for establishing a professional workshop. Students complete a final exhibition instrument.</p>
       </div>
     </div>
-
     <div class="quick-links reveal">
       <a href="#contact" class="ql-item">
         <h4>Apply Online</h4>
@@ -630,20 +887,10 @@
     <h2 class="section-title">Ready to Begin?</h2>
     <p class="section-desc">Whether you're ready to apply or simply have questions about our programme, we'd love to hear from you.</p>
     <a href="mailto:info@johnschmidtviolin.com" class="btn btn-primary" style="background:var(--clr-warm);">Contact Us</a>
-
     <div class="contact-details">
-      <div class="contact-item">
-        <strong>Location</strong>
-        <span>Wellington, New Zealand</span>
-      </div>
-      <div class="contact-item">
-        <strong>Email</strong>
-        <a href="mailto:info@johnschmidtviolin.com">info@johnschmidtviolin.com</a>
-      </div>
-      <div class="contact-item">
-        <strong>Hours</strong>
-        <span>Mon – Fri, 9am – 5pm</span>
-      </div>
+      <div class="contact-item"><strong>Location</strong><span>Wellington, New Zealand</span></div>
+      <div class="contact-item"><strong>Email</strong><a href="mailto:info@johnschmidtviolin.com">info@johnschmidtviolin.com</a></div>
+      <div class="contact-item"><strong>Hours</strong><span>Mon – Fri, 9am – 5pm</span></div>
     </div>
   </div>
 </section>
@@ -655,28 +902,174 @@
 </footer>
 
 <script>
-  // Nav scroll effect
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 40);
+// ── Nav scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// ── Mobile menu
+document.getElementById('hamburger').addEventListener('click', () => {
+  document.getElementById('navLinks').classList.toggle('open');
+});
+
+// ── Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      revealObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+reveals.forEach(el => revealObserver.observe(el));
+
+// ── Gallery Lightbox
+(function() {
+  const images = [
+    { src: 'images/bench1.png', alt: 'Workshop bench' },
+    { src: 'images/violin.png',  alt: 'Violin' },
+    { src: 'images/violin2.png', alt: 'Violin detail' },
+  ];
+
+  const lightbox  = document.getElementById('lightbox');
+  const lbImg     = document.getElementById('lbImg');
+  const lbCounter = document.getElementById('lbCounter');
+  let current = 0;
+
+  function showImage() {
+    lbImg.src = images[current].src;
+    lbImg.alt = images[current].alt;
+    lbCounter.textContent = (current + 1) + ' / ' + images.length;
+  }
+
+  function openLightbox(index) {
+    current = index;
+    showImage();
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function prev() { current = (current - 1 + images.length) % images.length; showImage(); }
+  function next() { current = (current + 1) % images.length; showImage(); }
+
+  document.querySelectorAll('.gallery-item').forEach(item => {
+    item.addEventListener('click', () => openLightbox(parseInt(item.dataset.index)));
   });
 
-  // Mobile menu
-  document.getElementById('hamburger').addEventListener('click', () => {
-    document.getElementById('navLinks').classList.toggle('open');
-  });
+  document.getElementById('lbClose').addEventListener('click', closeLightbox);
+  document.getElementById('lbPrev').addEventListener('click', prev);
+  document.getElementById('lbNext').addEventListener('click', next);
+  lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
 
-  // Scroll reveal
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        observer.unobserve(e.target);
+  document.addEventListener('keydown', e => {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape')      closeLightbox();
+    if (e.key === 'ArrowLeft')   prev();
+    if (e.key === 'ArrowRight')  next();
+  });
+})();
+
+// ── Audio Players
+(function() {
+  const PAUSE_ICON = '<svg viewBox="0 0 24 24" style="fill:#fff;width:14px;height:14px"><rect x="4" y="3" width="4" height="18"/><rect x="14" y="3" width="4" height="18"/></svg>';
+  const PLAY_ICON  = '<svg viewBox="0 0 24 24" style="fill:#fff;width:14px;height:14px;margin-left:2px"><polygon points="5,3 19,12 5,21"/></svg>';
+
+  let activeAudio = null;
+  let activeBtn   = null;
+
+  function fmt(s) {
+    if (!s || isNaN(s)) return '0:00';
+    const m = Math.floor(s / 60);
+    return m + ':' + String(Math.floor(s % 60)).padStart(2, '0');
+  }
+
+  document.querySelectorAll('.audio-play-btn').forEach(btn => {
+    const card          = btn.closest('.audio-card');
+    const progressInput = card.querySelector('.audio-progress');
+    const timeDisplay   = card.querySelector('.audio-time');
+    const audio         = new Audio();
+    audio.crossOrigin   = 'anonymous';
+    audio.preload       = 'none';
+    const trackSrc      = btn.dataset.track;
+
+    audio.addEventListener('timeupdate', () => {
+      if (audio.duration) {
+        progressInput.value = (audio.currentTime / audio.duration) * 100;
+        timeDisplay.textContent = fmt(audio.currentTime) + ' / ' + fmt(audio.duration);
       }
     });
-  }, { threshold: 0.15 });
-  reveals.forEach(el => observer.observe(el));
+
+    audio.addEventListener('loadedmetadata', () => {
+      timeDisplay.textContent = '0:00 / ' + fmt(audio.duration);
+    });
+
+    audio.addEventListener('ended', () => {
+      btn.innerHTML = PLAY_ICON;
+      btn.classList.remove('playing');
+      progressInput.value = 0;
+      activeAudio = null;
+      activeBtn   = null;
+    });
+
+    progressInput.addEventListener('input', () => {
+      if (audio.duration) {
+        audio.currentTime = (progressInput.value / 100) * audio.duration;
+      }
+    });
+
+    btn.addEventListener('click', () => {
+      // Stop any other playing track
+      if (activeAudio && activeAudio !== audio) {
+        activeAudio.pause();
+        activeBtn.innerHTML = PLAY_ICON;
+        activeBtn.classList.remove('playing');
+      }
+      if (audio.paused) {
+        if (!audio.src) { audio.src = trackSrc; audio.load(); }
+        audio.play().catch(err => console.warn('Audio play error:', err));
+        btn.innerHTML = PAUSE_ICON;
+        btn.classList.add('playing');
+        activeAudio = audio;
+        activeBtn   = btn;
+      } else {
+        audio.pause();
+        btn.innerHTML = PLAY_ICON;
+        btn.classList.remove('playing');
+        activeAudio = null;
+        activeBtn   = null;
+      }
+    });
+
+    // Store audio on the card so the preloader can access it
+    card._audio    = audio;
+    card._trackSrc = trackSrc;
+  });
+
+  // Preload all tracks as soon as the listen section enters the viewport
+  const listenSection = document.getElementById('listen');
+  if (listenSection) {
+    const preloadObs = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        document.querySelectorAll('.audio-card').forEach(card => {
+          if (card._audio && !card._audio.src) {
+            card._audio.src      = card._trackSrc;
+            card._audio.preload  = 'auto';
+            card._audio.load();
+          }
+        });
+        preloadObs.disconnect();
+      }
+    }, { threshold: 0.05 });
+    preloadObs.observe(listenSection);
+  }
+})();
 </script>
 
 </body>
