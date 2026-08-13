@@ -492,6 +492,18 @@
   .video-play svg { width: 26px; height: 26px; fill: var(--clr-dark); margin-left: 4px; }
   .video-thumb:hover .video-play { transform: translate(-50%, -50%) scale(1.1); background: var(--clr-warm-light); }
   .video-thumb:hover .video-play svg { fill: #fff; }
+  .video-title { font-size: 0.88rem; color: var(--clr-dark); font-weight: 400; }
+  .video-scroll {
+    max-height: 632px;
+    overflow-y: auto;
+    padding-right: 0.75rem;
+    scrollbar-width: thin;
+    scrollbar-color: var(--clr-muted) transparent;
+  }
+  .video-scroll::-webkit-scrollbar { width: 8px; }
+  .video-scroll::-webkit-scrollbar-track { background: transparent; }
+  .video-scroll::-webkit-scrollbar-thumb { background: var(--clr-divider); border-radius: 4px; }
+  .video-scroll::-webkit-scrollbar-thumb:hover { background: var(--clr-muted); }
 
   /* ── CURRICULUM CARDS ── */
   #curriculum { background: #F3EEE6; }
@@ -790,25 +802,171 @@
     <p class="section-label reveal">Watch &amp; Learn</p>
     <h2 class="section-title reveal">The Craft in Motion</h2>
     <p class="section-desc reveal">See the work of our workshop — the techniques, tools, and passion that go into every instrument we build.</p>
+
+    <div class="video-scroll">
     <div class="video-grid">
       <div class="video-item reveal">
-        <a class="video-thumb" href="https://youtu.be/6dj77kTGcmE" target="_blank" rel="noopener">
-          <img src="https://img.youtube.com/vi/6dj77kTGcmE/maxresdefault.jpg" alt="Watch video">
+        <a class="video-thumb" href="https://youtu.be/VmGitkLpY8I?si=kkW-_g7yGGu9RIdf" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/VmGitkLpY8I/maxresdefault.jpg" alt="Watch video">
           <div class="video-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
         </a>
+        <p class="video-title">Violin carving cradle</p>
       </div>
       <div class="video-item reveal">
-        <a class="video-thumb" href="https://youtu.be/k6kZ45gl5tU" target="_blank" rel="noopener">
+        <a class="video-thumb" href="https://youtube.com/shorts/bbhKXYuk9sA?si=ZHs6Wn8qaK6bxYjX" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/bbhKXYuk9sA/maxresdefault.jpg" alt="Watch video">
+          <div class="video-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+        </a>
+        <p class="video-title">Purfling marker</p>
+      </div>
+      <div class="video-item reveal">
+        <a class="video-thumb" href="https://youtu.be/IsiueKsm4Es?feature=shared" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/IsiueKsm4Es/maxresdefault.jpg" alt="Watch video">
+          <div class="video-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+        </a>
+        <p class="video-title">Tool pouch — Ruben</p>
+      </div>
+      <div class="video-item reveal">
+        <a class="video-thumb" href="https://youtu.be/k6kZ45gl5tU?feature=shared" target="_blank" rel="noopener">
           <img src="https://img.youtube.com/vi/k6kZ45gl5tU/maxresdefault.jpg" alt="Watch video">
           <div class="video-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
         </a>
+        <p class="video-title">Brake rotor hone</p>
       </div>
       <div class="video-item reveal">
-        <a class="video-thumb" href="https://youtu.be/Rch9S1JrseY" target="_blank" rel="noopener">
+        <a class="video-thumb" href="https://youtu.be/_ZAbpJAMadg?feature=shared" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/_ZAbpJAMadg/maxresdefault.jpg" alt="Watch video">
+          <div class="video-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+        </a>
+        <p class="video-title">Gouge sharpening jig</p>
+      </div>
+      <div class="video-item reveal">
+        <a class="video-thumb" href="https://youtu.be/sbJRnOxIi9E?feature=shared" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/sbJRnOxIi9E/maxresdefault.jpg" alt="Watch video">
+          <div class="video-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+        </a>
+        <p class="video-title">Gouge sharpening jig</p>
+      </div>
+      <div class="video-item reveal">
+        <a class="video-thumb" href="https://youtube.com/shorts/mgA81-LewZw?si=yIRjuneE3QxueB1G" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/mgA81-LewZw/maxresdefault.jpg" alt="Watch video">
+          <div class="video-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+        </a>
+        <p class="video-title">Planing center joint</p>
+      </div>
+      <div class="video-item reveal">
+        <a class="video-thumb" href="https://youtu.be/Rch9S1JrseY?feature=shared" target="_blank" rel="noopener">
           <img src="https://img.youtube.com/vi/Rch9S1JrseY/maxresdefault.jpg" alt="Watch video">
           <div class="video-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
         </a>
+        <p class="video-title">Gluing plate center joint</p>
       </div>
+      <div class="video-item reveal">
+        <a class="video-thumb" href="https://www.youtube.com/watch?v=v4LleauXhkk" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/v4LleauXhkk/maxresdefault.jpg" alt="Watch video">
+          <div class="video-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+        </a>
+        <p class="video-title">Flattening joined plates</p>
+      </div>
+      <div class="video-item reveal">
+        <a class="video-thumb" href="https://youtu.be/Z6pO0ujP3eo?feature=shared" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/Z6pO0ujP3eo/maxresdefault.jpg" alt="Watch video">
+          <div class="video-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+        </a>
+        <p class="video-title">Blocks — gluing to the mould</p>
+      </div>
+      <div class="video-item reveal">
+        <a class="video-thumb" href="https://youtube.com/shorts/YZoSjyzxeVw?si=-T-lqNBr_muYU6C-" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/YZoSjyzxeVw/maxresdefault.jpg" alt="Watch video">
+          <div class="video-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+        </a>
+        <p class="video-title">Blocks, carving shape</p>
+      </div>
+      <div class="video-item reveal">
+        <a class="video-thumb" href="https://youtu.be/S_FU5EwjzUY" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/S_FU5EwjzUY/maxresdefault.jpg" alt="Watch video">
+          <div class="video-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+        </a>
+        <p class="video-title">Blocks, carving shape — Mike Cowles</p>
+      </div>
+      <div class="video-item reveal">
+        <a class="video-thumb" href="https://www.youtube.com/shorts/P2K5P0HIJZk" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/P2K5P0HIJZk/maxresdefault.jpg" alt="Watch video">
+          <div class="video-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+        </a>
+        <p class="video-title">Linings install — Pablo &amp; Tomas</p>
+      </div>
+      <div class="video-item reveal">
+        <a class="video-thumb" href="https://youtu.be/_muxn7LMUYo" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/_muxn7LMUYo/maxresdefault.jpg" alt="Watch video">
+          <div class="video-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+        </a>
+        <p class="video-title">Rough gouging back plate — Pablo Wolinski</p>
+      </div>
+      <div class="video-item reveal">
+        <a class="video-thumb" href="https://youtu.be/_muxn7LMUYo" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/_muxn7LMUYo/maxresdefault.jpg" alt="Watch video">
+          <div class="video-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+        </a>
+        <p class="video-title">Cutting the purfling slot</p>
+      </div>
+      <div class="video-item reveal">
+        <a class="video-thumb" href="https://youtu.be/h1yMnWXPvo4?feature=shared" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/h1yMnWXPvo4/maxresdefault.jpg" alt="Watch video">
+          <div class="video-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+        </a>
+        <p class="video-title">Cutting purfling channel</p>
+      </div>
+      <div class="video-item reveal">
+        <a class="video-thumb" href="https://youtu.be/AcJfE3RMgX0?feature=shared" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/AcJfE3RMgX0/maxresdefault.jpg" alt="Watch video">
+          <div class="video-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+        </a>
+        <p class="video-title">Arching templates — Dan Ashby</p>
+      </div>
+      <div class="video-item reveal">
+        <a class="video-thumb" href="https://www.youtube.com/shorts/09Ib3eo80rg" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/09Ib3eo80rg/maxresdefault.jpg" alt="Watch video">
+          <div class="video-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+        </a>
+        <p class="video-title">Arching templates and mould — Dan &amp; Clare</p>
+      </div>
+      <div class="video-item reveal">
+        <a class="video-thumb" href="https://youtu.be/4PCxqXKk7H8" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/4PCxqXKk7H8/maxresdefault.jpg" alt="Watch video">
+          <div class="video-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+        </a>
+        <p class="video-title">Installing purfling</p>
+      </div>
+      <div class="video-item reveal">
+        <a class="video-thumb" href="https://youtu.be/khZLKMCk0QY" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/khZLKMCk0QY/maxresdefault.jpg" alt="Watch video">
+          <div class="video-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+        </a>
+        <p class="video-title">Scraper used on top plate</p>
+      </div>
+      <div class="video-item reveal">
+        <a class="video-thumb" href="https://youtu.be/_NrK4rLn_u8" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/_NrK4rLn_u8/maxresdefault.jpg" alt="Watch video">
+          <div class="video-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+        </a>
+        <p class="video-title">Arching top plate — Dan Ashby</p>
+      </div>
+      <div class="video-item reveal">
+        <a class="video-thumb" href="https://www.youtube.com/watch?v=3Y8yHTc0Mw8" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/3Y8yHTc0Mw8/maxresdefault.jpg" alt="Watch video">
+          <div class="video-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+        </a>
+        <p class="video-title">Inside plate gouging — Dan Ashby</p>
+      </div>
+      <div class="video-item reveal">
+        <a class="video-thumb" href="https://youtu.be/qmeapp5SGvk?feature=shared" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/qmeapp5SGvk/maxresdefault.jpg" alt="Watch video">
+          <div class="video-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+        </a>
+        <p class="video-title">Cutting f-holes</p>
+      </div>
+    </div>
     </div>
   </div>
 </section>
