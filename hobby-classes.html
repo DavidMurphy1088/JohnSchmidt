@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hobbyist Violin Making Classes — with John Schmidt</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --clr-bg: #FAF7F2;
+    --clr-dark: #1A1612;
+    --clr-warm: #8B6914;
+    --clr-warm-light: #C4981A;
+    --clr-accent: #6B3A2A;
+    --clr-muted: #A09888;
+    --clr-card: #FFFFFF;
+    --clr-divider: #E8E0D4;
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'Outfit', system-ui, sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-body);
+    font-weight: 300;
+    color: var(--clr-dark);
+    background: var(--clr-bg);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(250, 247, 242, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--clr-divider);
+    transition: box-shadow 0.3s;
+  }
+  nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.06); }
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: var(--clr-dark);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+  .nav-logo span { color: var(--clr-warm); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.82rem;
+    font-weight: 400;
+    color: var(--clr-dark);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    position: relative;
+    transition: color 0.25s;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0;
+    width: 0; height: 1.5px;
+    background: var(--clr-warm);
+    transition: width 0.3s;
+  }
+  .nav-links a:hover { color: var(--clr-warm); }
+  .nav-links a:hover::after { width: 100%; }
+  .hamburger {
+    display: none;
+    background: none; border: none; cursor: pointer;
+    flex-direction: column; gap: 5px;
+  }
+  .hamburger span {
+    display: block; width: 24px; height: 2px;
+    background: var(--clr-dark); transition: 0.3s;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    padding-top: 64px;
+    background:
+      radial-gradient(ellipse at 30% 70%, rgba(139,105,20,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 70% 30%, rgba(107,58,42,0.06) 0%, transparent 60%),
+      var(--clr-bg);
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(90deg, transparent, transparent 80px, var(--clr-divider) 80px, var(--clr-divider) 81px),
+      repeating-linear-gradient(0deg, transparent, transparent 80px, var(--clr-divider) 80px, var(--clr-divider) 81px);
+    opacity: 0.25;
+  }
+  .hero-content { position: relative; z-index: 1; padding: 2rem; max-width: 760px; }
+  .hero-badge {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--clr-warm);
+    border: 1px solid var(--clr-warm);
+    padding: 0.4rem 1.4rem;
+    border-radius: 100px;
+    margin-bottom: 2rem;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.6rem, 5.5vw, 4.6rem);
+    line-height: 1.1;
+    color: var(--clr-dark);
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.8s 0.15s ease both;
+  }
+  .hero h1 em { font-style: italic; color: var(--clr-warm); }
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--clr-muted);
+    max-width: 560px;
+    margin: 0 auto 2.5rem;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+  .hero-cta {
+    display: inline-flex; gap: 1rem;
+    flex-wrap: wrap; justify-content: center;
+    animation: fadeUp 0.8s 0.45s ease both;
+  }
+  .btn {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0.9rem 2.2rem;
+    border-radius: 4px;
+    transition: all 0.3s;
+    cursor: pointer;
+    border: none;
+  }
+  .btn-primary { background: var(--clr-dark); color: #fff; }
+  .btn-primary:hover {
+    background: var(--clr-warm);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(139,105,20,0.25);
+  }
+  .btn-outline {
+    background: transparent;
+    color: var(--clr-dark);
+    border: 1.5px solid var(--clr-dark);
+  }
+  .btn-outline:hover {
+    border-color: var(--clr-warm);
+    color: var(--clr-warm);
+    transform: translateY(-2px);
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 6rem 2rem; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--clr-warm);
+    margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+  }
+  .section-desc {
+    color: var(--clr-muted);
+    max-width: 600px;
+    font-size: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  /* ── ABOUT / FOUNDER-STYLE LAYOUT ── */
+  #about { background: var(--clr-bg); }
+  .founder-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  .founder-portrait {
+    width: 100%;
+    aspect-ratio: 3/4;
+    border-radius: 8px;
+    overflow: hidden;
+    background: linear-gradient(160deg, #C4981A 0%, #8B6914 100%);
+  }
+  .founder-portrait img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .founder-text h3 { font-family: var(--font-display); font-size: 1.8rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .founder-role { font-size: 0.85rem; color: var(--clr-warm); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1.5rem; }
+  .founder-text p { color: #4A4239; margin-bottom: 1rem; }
+
+  /* ── PROGRAMME CARD ── */
+  #programme { background: #F3EEE6; }
+  .programme-layout {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  .programme-image {
+    border-radius: 8px;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+  }
+  .programme-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .programme-image-caption {
+    font-size: 0.75rem;
+    color: var(--clr-muted);
+    margin-top: 0.6rem;
+    font-style: italic;
+  }
+  .programme-image-caption a { color: var(--clr-warm); text-decoration: none; }
+  .programme-image-caption a:hover { text-decoration: underline; }
+  .programme-facts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin: 1.75rem 0;
+  }
+  .fact strong {
+    display: block;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--clr-muted);
+    margin-bottom: 0.3rem;
+  }
+  .fact span { font-family: var(--font-display); font-size: 1.2rem; color: var(--clr-dark); }
+  .programme-quote {
+    background: var(--clr-card);
+    border-left: 3px solid var(--clr-warm);
+    border-radius: 4px;
+    padding: 1.5rem 1.75rem;
+    font-style: italic;
+    color: #4A4239;
+    font-size: 0.95rem;
+    margin-top: 1.5rem;
+  }
+  .programme-quote cite {
+    display: block;
+    margin-top: 0.75rem;
+    font-style: normal;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--clr-muted);
+  }
+  .programme-quote cite a { color: var(--clr-warm); text-decoration: none; }
+  .programme-quote cite a:hover { text-decoration: underline; }
+
+  /* ── PHOTOS / LIGHTBOX ── */
+  #photos { background: var(--clr-dark); }
+  #photos .section-label { color: var(--clr-warm-light); }
+  #photos .section-title { color: #fff; }
+  #photos .section-desc { color: rgba(255,255,255,0.5); }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    max-width: 720px;
+  }
+  .gallery-item {
+    position: relative;
+    aspect-ratio: 4/3;
+    border-radius: 6px;
+    overflow: hidden;
+    cursor: pointer;
+    background: #111;
+  }
+  .gallery-item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease, opacity 0.3s ease;
+  }
+  .gallery-item:hover img { transform: scale(1.06); opacity: 0.75; }
+  .gallery-item-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .gallery-item:hover .gallery-item-overlay { opacity: 1; }
+  .gallery-item-overlay svg { width: 32px; height: 32px; stroke: #fff; stroke-width: 1.5; fill: none; }
+
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.92);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .lightbox.open { opacity: 1; pointer-events: all; }
+  .lightbox-img-wrap {
+    max-width: 90vw;
+    max-height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .lightbox-img-wrap img {
+    max-width: 90vw;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: 4px;
+    display: block;
+  }
+  .lb-btn {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.12);
+    border: none;
+    color: #fff;
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    font-size: 1.6rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    z-index: 1001;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,0.25); }
+  .lb-prev { left: 1.5rem; }
+  .lb-next { right: 1.5rem; }
+  .lb-close {
+    position: fixed;
+    top: 1.5rem; right: 1.5rem;
+    background: rgba(255,255,255,0.12);
+    border: none;
+    color: #fff;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    z-index: 1001;
+  }
+  .lb-close:hover { background: rgba(255,255,255,0.25); }
+  .lb-counter {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.5);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+  }
+
+  /* ── VIDEOS ── */
+  #videos { background: var(--clr-bg); }
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .video-item { display: flex; flex-direction: column; gap: 0.75rem; }
+  .video-thumb {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 6px;
+    background: #111;
+    display: block;
+    text-decoration: none;
+  }
+  .video-thumb img {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease, opacity 0.3s ease;
+  }
+  .video-thumb:hover img { transform: scale(1.03); opacity: 0.85; }
+  .video-play {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 68px; height: 68px;
+    background: rgba(255,255,255,0.95);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, background 0.3s ease;
+    z-index: 2;
+  }
+  .video-play svg { width: 26px; height: 26px; fill: var(--clr-dark); margin-left: 4px; }
+  .video-thumb:hover .video-play { transform: translate(-50%, -50%) scale(1.1); background: var(--clr-warm-light); }
+  .video-thumb:hover .video-play svg { fill: #fff; }
+  .video-title { font-size: 0.88rem; color: var(--clr-dark); font-weight: 400; }
+
+  /* ── TESTIMONIALS ── */
+  #feedback { background: #F3EEE6; }
+  .sample-notice {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(139,105,20,0.1);
+    border: 1px solid var(--clr-warm);
+    color: var(--clr-warm);
+    font-size: 0.78rem;
+    padding: 0.6rem 1.1rem;
+    border-radius: 100px;
+    margin-bottom: 2.5rem;
+  }
+  .testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .testimonial-card {
+    background: var(--clr-card);
+    border: 1px solid var(--clr-divider);
+    border-radius: 8px;
+    padding: 2rem 1.75rem;
+    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .testimonial-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.06); }
+  .testimonial-badge {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--clr-muted);
+    background: var(--clr-bg);
+    border: 1px solid var(--clr-divider);
+    padding: 0.25rem 0.6rem;
+    border-radius: 100px;
+    margin-bottom: 1.1rem;
+  }
+  .testimonial-quote {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--clr-dark);
+    margin-bottom: 1.25rem;
+  }
+  .testimonial-name { font-size: 0.85rem; font-weight: 500; color: var(--clr-dark); }
+  .testimonial-role { font-size: 0.78rem; color: var(--clr-muted); }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--clr-dark); color: #fff; text-align: center; }
+  #contact .section-label { color: var(--clr-warm-light); }
+  #contact .section-title { color: #fff; }
+  #contact .section-desc { color: rgba(255,255,255,0.5); margin-left: auto; margin-right: auto; }
+  .contact-details { display: flex; justify-content: center; gap: 4rem; margin-top: 2.5rem; flex-wrap: wrap; }
+  .contact-item { text-align: center; }
+  .contact-item strong { display: block; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.4); margin-bottom: 0.4rem; }
+  .contact-item span, .contact-item a { font-family: var(--font-display); font-size: 1.1rem; color: #fff; text-decoration: none; }
+  .contact-item a:hover { color: var(--clr-warm-light); }
+
+  /* ── FOOTER ── */
+  footer { background: #151210; color: rgba(255,255,255,0.35); text-align: center; padding: 2rem; font-size: 0.8rem; }
+  footer a { color: var(--clr-warm-light); text-decoration: none; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .founder-layout { grid-template-columns: 1fr; }
+    .founder-portrait { max-width: 220px; }
+    .programme-layout { grid-template-columns: 1fr; }
+    .video-grid { grid-template-columns: 1fr; }
+    .testimonial-grid { grid-template-columns: 1fr; }
+    .contact-details { gap: 2rem; }
+    .gallery-grid { max-width: 100%; }
+  }
+  @media (max-width: 600px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .nav-links.open {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 64px; left: 0; right: 0;
+      background: var(--clr-bg);
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid var(--clr-divider);
+      gap: 1rem;
+    }
+    section { padding: 4rem 1.5rem; }
+    .programme-facts { grid-template-columns: 1fr 1fr; }
+    .gallery-grid { grid-template-columns: 1fr; }
+    .lb-prev { left: 0.5rem; }
+    .lb-next { right: 0.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">WSVM <span>·</span> Wellington</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#programme">The Programme</a></li>
+      <li><a href="#photos">Photos</a></li>
+      <li><a href="#videos">Videos</a></li>
+      <li><a href="#feedback">Feedback</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="index.html">Main Site</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">Wellington, New Zealand · Weekly Sessions</div>
+    <h1>Violin Making <em>for the Love of It</em></h1>
+    <p class="hero-sub">Alongside directing the Wellington School of Violin Making, John Schmidt also runs weekly hands-on violin-making classes for hobbyists and enthusiasts — no professional ambitions required, just curiosity and a love of the craft.</p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn btn-primary">Join a Session</a>
+      <a href="#about" class="btn btn-outline">Learn More</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="founder-layout reveal">
+      <div class="founder-portrait">
+        <img src="images/john_schmidt.png" alt="John Schmidt">
+      </div>
+      <div class="founder-text">
+        <p class="section-label">Hobbyist Violin Classes</p>
+        <h3>John Schmidt</h3>
+        <p class="founder-role">Weekly Sessions · Wellington</p>
+        <p>Outside of directing the Wellington School of Violin Making, John also welcomes hobbyists and enthusiasts who simply want to experience the craft of building a violin by hand — without committing to a professional, multi-year programme.</p>
+        <p>Each week, John guides a small group through the same traditional techniques used by his full-time students: wood selection, carving, purfling, arching, and varnishing — taught at a relaxed, hobbyist pace.</p>
+        <p>Whether you're a retired engineer, a weekend woodworker, or simply violin-curious, John's sessions are a welcoming way to learn a centuries-old craft alongside other enthusiasts.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMME -->
+<section id="programme">
+  <div class="section-inner">
+    <p class="section-label reveal">The Programme</p>
+    <h2 class="section-title reveal">Join Any Time</h2>
+    <p class="section-desc reveal">The essentials of John's ongoing hobbyist violin-making sessions.</p>
+    <div class="programme-layout reveal">
+      <div>
+        <div class="programme-facts">
+          <div class="fact"><strong>Day</strong><span>Every Wednesday</span></div>
+          <div class="fact"><strong>Commitment</strong><span>Min. 3 months</span></div>
+          <div class="fact"><strong>Cost</strong><span>$300 / 3-month term</span></div>
+          <div class="fact"><strong>Location</strong><span>BenchSpace, Wellington</span></div>
+        </div>
+        <div class="programme-quote">
+          "Making a violin is no easy feat! So unlike our regular courses, our special violin-making sessions are held every Wednesday on an ongoing basis. You can join any time for a minimum of 3 months. It costs $300 per 3 month term. If you're interested, get in touch."
+          <cite>Violin-Making Programme, via <a href="https://benchspace.nz/courses" target="_blank" rel="noopener">benchspace.nz</a></cite>
+        </div>
+      </div>
+      <div>
+        <div class="programme-image">
+          <img src="images/benchspace-violin-programme.jpg" alt="Tools laid out for a violin-making session at BenchSpace">
+        </div>
+        <p class="programme-image-caption">A row of tools ready for a session, via <a href="https://benchspace.nz/courses" target="_blank" rel="noopener">benchspace.nz</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTOS -->
+<section id="photos">
+  <div class="section-inner">
+    <p class="section-label reveal">A Look Inside</p>
+    <h2 class="section-title reveal">John &amp; the Workshop</h2>
+    <p class="section-desc reveal">Click any image to view full-screen.</p>
+    <div class="gallery-grid reveal">
+      <div class="gallery-item" data-index="0">
+        <img src="images/john_schmidt.png" alt="John Schmidt">
+        <div class="gallery-item-overlay">
+          <svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+        </div>
+      </div>
+      <div class="gallery-item" data-index="1">
+        <img src="images/benchspace-violin-programme.jpg" alt="Violin-making tools at BenchSpace">
+        <div class="gallery-item-overlay">
+          <svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+  <button class="lb-close" id="lbClose" aria-label="Close">✕</button>
+  <button class="lb-btn lb-prev" id="lbPrev" aria-label="Previous">‹</button>
+  <div class="lightbox-img-wrap">
+    <img src="" alt="" id="lbImg">
+  </div>
+  <button class="lb-btn lb-next" id="lbNext" aria-label="Next">›</button>
+  <div class="lb-counter" id="lbCounter"></div>
+</div>
+
+<!-- VIDEOS -->
+<section id="videos">
+  <div class="section-inner">
+    <p class="section-label reveal">Techniques You'll Learn</p>
+    <h2 class="section-title reveal">From the Workshop Floor</h2>
+    <p class="section-desc reveal">A few examples of the hands-on techniques covered in John's sessions, pulled from the school's technique library.</p>
+    <div class="video-grid">
+      <div class="video-item reveal">
+        <a class="video-thumb" href="https://youtu.be/VmGitkLpY8I?si=kkW-_g7yGGu9RIdf" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/VmGitkLpY8I/maxresdefault.jpg" alt="Watch video">
+          <div class="video-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+        </a>
+        <p class="video-title">Violin carving cradle</p>
+      </div>
+      <div class="video-item reveal">
+        <a class="video-thumb" href="https://youtube.com/shorts/bbhKXYuk9sA?si=ZHs6Wn8qaK6bxYjX" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/bbhKXYuk9sA/maxresdefault.jpg" alt="Watch video">
+          <div class="video-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+        </a>
+        <p class="video-title">Purfling marker</p>
+      </div>
+      <div class="video-item reveal">
+        <a class="video-thumb" href="https://youtu.be/IsiueKsm4Es?feature=shared" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/IsiueKsm4Es/maxresdefault.jpg" alt="Watch video">
+          <div class="video-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+        </a>
+        <p class="video-title">Tool pouch — Ruben</p>
+      </div>
+      <div class="video-item reveal">
+        <a class="video-thumb" href="https://youtu.be/AcJfE3RMgX0?feature=shared" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/AcJfE3RMgX0/maxresdefault.jpg" alt="Watch video">
+          <div class="video-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+        </a>
+        <p class="video-title">Arching templates — Dan Ashby</p>
+      </div>
+      <div class="video-item reveal">
+        <a class="video-thumb" href="https://youtu.be/4PCxqXKk7H8" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/4PCxqXKk7H8/maxresdefault.jpg" alt="Watch video">
+          <div class="video-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+        </a>
+        <p class="video-title">Installing purfling</p>
+      </div>
+      <div class="video-item reveal">
+        <a class="video-thumb" href="https://youtu.be/qmeapp5SGvk?feature=shared" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/qmeapp5SGvk/maxresdefault.jpg" alt="Watch video">
+          <div class="video-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+        </a>
+        <p class="video-title">Cutting f-holes</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEEDBACK -->
+<section id="feedback">
+  <div class="section-inner">
+    <p class="section-label reveal">What Students Say</p>
+    <h2 class="section-title reveal">Hobbyist Feedback</h2>
+    <div class="sample-notice reveal">⚠ Sample feedback shown below — John will replace these with real quotes once current students share their experience.</div>
+    <div class="testimonial-grid reveal">
+      <div class="testimonial-card">
+        <span class="testimonial-badge">Sample</span>
+        <p class="testimonial-quote">"I always wanted to try lutherie without quitting my day job. John's Wednesday sessions are exactly that — patient, hands-on, and genuinely fun."</p>
+        <p class="testimonial-name">Placeholder Name</p>
+        <p class="testimonial-role">Hobbyist student</p>
+      </div>
+      <div class="testimonial-card">
+        <span class="testimonial-badge">Sample</span>
+        <p class="testimonial-quote">"I'd never touched a carving gouge before my first class. John breaks everything down so it never feels overwhelming, even for a total beginner."</p>
+        <p class="testimonial-name">Placeholder Name</p>
+        <p class="testimonial-role">Hobbyist student</p>
+      </div>
+      <div class="testimonial-card">
+        <span class="testimonial-badge">Sample</span>
+        <p class="testimonial-quote">"It's become the best two hours of my week. Small group, great company, and I'm slowly watching my own violin take shape."</p>
+        <p class="testimonial-name">Placeholder Name</p>
+        <p class="testimonial-role">Hobbyist student</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner reveal">
+    <p class="section-label">Ready to Join?</p>
+    <h2 class="section-title">Come Build a Violin</h2>
+    <p class="section-desc">Sessions run every Wednesday at BenchSpace and welcome new hobbyists at any time — just get in touch to find out more.</p>
+    <a href="mailto:jpschmidt4444@gmail.com" class="btn btn-primary" style="background:var(--clr-warm);">Contact John</a>
+    <div class="contact-details">
+      <div class="contact-item"><strong>Location</strong><span>BenchSpace, Wellington</span></div>
+      <div class="contact-item"><strong>Email</strong><a href="mailto:jpschmidt4444@gmail.com">jpschmidt4444@gmail.com</a></div>
+      <div class="contact-item"><strong>Sessions</strong><span>Every Wednesday</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2026 Wellington School of Violin Making. Founded by John Schmidt. All rights reserved.</p>
+  <p style="margin-top:0.4rem;"><a href="index.html">Back to Main Site</a></p>
+</footer>
+
+<script>
+// ── Nav scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// ── Mobile menu
+document.getElementById('hamburger').addEventListener('click', () => {
+  document.getElementById('navLinks').classList.toggle('open');
+});
+
+// ── Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      revealObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+reveals.forEach(el => revealObserver.observe(el));
+
+// ── Gallery Lightbox
+(function() {
+  const images = [
+    { src: 'images/john_schmidt.png', alt: 'John Schmidt' },
+    { src: 'images/benchspace-violin-programme.jpg', alt: 'Violin-making tools at BenchSpace' },
+  ];
+
+  const lightbox  = document.getElementById('lightbox');
+  const lbImg     = document.getElementById('lbImg');
+  const lbCounter = document.getElementById('lbCounter');
+  let current = 0;
+
+  function showImage() {
+    lbImg.src = images[current].src;
+    lbImg.alt = images[current].alt;
+    lbCounter.textContent = (current + 1) + ' / ' + images.length;
+  }
+
+  function openLightbox(index) {
+    current = index;
+    showImage();
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function prev() { current = (current - 1 + images.length) % images.length; showImage(); }
+  function next() { current = (current + 1) % images.length; showImage(); }
+
+  document.querySelectorAll('.gallery-item').forEach(item => {
+    item.addEventListener('click', () => openLightbox(parseInt(item.dataset.index)));
+  });
+
+  document.getElementById('lbClose').addEventListener('click', closeLightbox);
+  document.getElementById('lbPrev').addEventListener('click', prev);
+  document.getElementById('lbNext').addEventListener('click', next);
+  lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+
+  document.addEventListener('keydown', e => {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape')      closeLightbox();
+    if (e.key === 'ArrowLeft')   prev();
+    if (e.key === 'ArrowRight')  next();
+  });
+})();
+</script>
+
+</body>
+</html>
